@@ -13,7 +13,7 @@ class BaseUI(ABC):
         pass
 
 
-class ConsoleInterface(BaseUI):
+class ConsoleUI(BaseUI):
     """Консольная реализация интерфейса пользователя."""
 
     def __init__(self, library_service: LibraryServiceInterface):

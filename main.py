@@ -2,13 +2,13 @@
 
 from services.library import LibraryService
 from utils.data import JsonManager
-from cli import ConsoleInterface
+from cli import ConsoleUI
 
 
 def main():
     data_manager = JsonManager()
     library_service = LibraryService(data_manager)
-    cli = ConsoleInterface(library_service)
+    cli = ConsoleUI(library_service)
     cli.run()
 
 

@@ -48,7 +48,7 @@ class JsonManager(DataManagerInterface):
     ) -> None:
         """Сохраняет данные в файл JSON."""
         try:
-            with open(data_file, "w", encoding="utf-8") as file:
+            with open(temp_file, "w", encoding="utf-8") as file:
                 data = [asdict(item) for item in books]
                 json.dump(data, file, ensure_ascii=False, indent=2)
 
@@ -56,6 +56,5 @@ class JsonManager(DataManagerInterface):
 
         except (IOError, json.JSONDecodeError) as e:
             print(f"Ошибка записи данных в файл {data_file}: {e}")
-
             if os.path.exists(temp_file):
                 os.remove(temp_file)
