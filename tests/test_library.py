@@ -33,6 +33,21 @@ class TestLibraryService(unittest.TestCase):
         book = self.library_service.find_book_by_id(1)
         self.assertEqual(book.status, BookStatus.BORROWED.value)
 
+    def test_remove_nonexistent_book(self):
+        self.assertFalse(self.library_service.remove_book(99))
+
+    def test_search_books_no_result(self):
+        results = self.library_service.search_books("Несуществующая", "название")
+        self.assertEqual(len(results), 0)
+
+    def test_change_book_status_invalid_id(self):
+        success = self.library_service.change_book_status(99, BookStatus.BORROWED.value)
+        self.assertFalse(success)
+
+    def test_find_book_by_id_invalid(self):
+        book = self.library_service.find_book_by_id(99)
+        self.assertIsNone(book)
+
 
 if __name__ == "__main__":
     unittest.main()

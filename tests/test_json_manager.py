@@ -29,6 +29,18 @@ class TestJsonManager(unittest.TestCase):
         self.assertEqual(loaded_books[0].title, "Тестовая книга")
         self.assertEqual(loaded_books[0].author, "Автор")
 
+    def test_load_empty_file(self):
+        with open(self.test_file, "w") as f:
+            f.write("")
+        books = self.manager.load_data(data_file=self.test_file)
+        self.assertEqual(len(books), 0)
+
+    def test_load_invalid_json(self):
+        with open(self.test_file, "w") as f:
+            f.write("{invalid_json}")
+        books = self.manager.load_data(data_file=self.test_file)
+        self.assertEqual(len(books), 0)
+
 
 if __name__ == "__main__":
     unittest.main()
